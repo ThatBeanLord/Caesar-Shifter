@@ -11,10 +11,11 @@ namespace Caesar_Shifter
         static void Main(string[] args)
         {
             // declaring variables
-            string[] alphabet = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " " };
+            string alphabetString = "abcdefghijklmnopqrstuvwxyz ";
+            char[] alphabet = alphabetString.ToCharArray();
             string direction = "forwards";
-            string seperatedLetter;
-            string seperatedLetterShifted = "";
+            char seperatedLetter;
+            char seperatedLetterShifted;
             int intLetterShifted;
             int posLetter = 0;
             string finalText = "";
@@ -34,26 +35,26 @@ namespace Caesar_Shifter
             int originalLength = originalText.Length;
 
             bool[] capital = new bool[originalLength];
-            string[] separatedText = new string[originalLength];
+            char[] separatedText = new char[originalLength];
 
             for (int i = 0; i < originalLength; i++)
             {
                 // seperating letter and finding position in the alphabet
-                seperatedLetter = originalText.Substring(i, 1);
+                seperatedLetter = originalText[i];
 
-                if (seperatedLetter != " ")
+                if (seperatedLetter != ' ')
                 {
-                    capital[i] = (seperatedLetter.ToUpper() == seperatedLetter);
-                    seperatedLetter = seperatedLetter.ToLower();
+                    capital[i] = (Char.ToUpper(seperatedLetter) == seperatedLetter);
+                    seperatedLetter = Char.ToLower(seperatedLetter);
                 }
                 separatedText[i] = seperatedLetter;
             }
 
-            foreach (string letter in separatedText)
+            foreach (char letter in separatedText)
             {
                 int intLetter = Array.IndexOf(alphabet, letter);
 
-                seperatedLetterShifted = " ";
+                seperatedLetterShifted = ' ';
 
                 // shifting number
                 if (intLetter != 26)
@@ -80,7 +81,7 @@ namespace Caesar_Shifter
                 }
                 if (capital[posLetter] == true)
                 {
-                    seperatedLetterShifted = seperatedLetterShifted.ToUpper();
+                    seperatedLetterShifted = Char.ToUpper(seperatedLetterShifted);
                 }
 
                 posLetter++;
